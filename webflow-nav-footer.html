@@ -1,0 +1,91 @@
+<!--
+  THE HUMAN AI CO — SHARED NAV + FOOTER
+  ------------------------------------------------------------------------------
+  Paste the <nav> block onto the canvas at the top of EVERY page, and the
+  <footer> block at the bottom of every page. Then in Webflow, right-click each
+  and choose "Create Symbol" (nav) / "Create Symbol" (footer) so both stay in
+  sync across all 6 pages — edit once, updates everywhere.
+
+  On each page, add the class "is-active" to that page's nav link (already
+  done per-page below isn't possible since this is one shared symbol — instead
+  set the active state per-page using Webflow's page-specific "current page"
+  combo class, or simply leave as-is; it's a minor visual nicety).
+
+  Replace the 4 "#" hrefs with your real page links once pages are created,
+  and the mailto/social hrefs with your real details.
+-->
+
+<!-- ===== NAV (paste once, turn into Symbol, reuse on all 6 pages) ===== -->
+<nav class="hai-nav">
+  <div class="hai-nav-inner">
+    <a href="/" class="hai-logo">
+      <span class="hai-logo-mark">The Human AI Co</span>
+      <span class="hai-logo-sub">AI, guided by human intelligence.</span>
+    </a>
+    <ul class="hai-nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/foundation">Foundation</a></li>
+      <li><a href="/aurora">Aurora</a></li>
+      <li><a href="/clarity">Clarity</a></li>
+      <li><a href="/navigation">Navigation</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== FOOTER (paste once, turn into Symbol, reuse on all 6 pages) ===== -->
+<footer class="hai-footer">
+  <div class="hai-container">
+    <div class="hai-footer-grid">
+      <div>
+        <div class="hai-footer-col-heading">Services</div>
+        <ul class="hai-footer-links">
+          <li><a href="/foundation">Foundation</a></li>
+          <li><a href="/aurora">Aurora</a></li>
+          <li><a href="/clarity">Clarity</a></li>
+          <li><a href="/navigation">Navigation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="hai-footer-col-heading">Company</div>
+        <ul class="hai-footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="hai-footer-col-heading">Contact</div>
+        <ul class="hai-footer-links">
+          <li><a href="mailto:hello@thehumanai.co">hello@thehumanai.co</a></li>
+          <li><a href="/contact">Enquiry form</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="hai-footer-col-heading">Newsletter</div>
+        <p style="font-size:14px; color:rgba(0,0,0,0.65); margin:0 0 16px;">Ideas on AI, growth and staying human, sent occasionally.</p>
+        <form style="display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(0,0,0,0.3); padding-bottom:8px;">
+          <input type="email" placeholder="your@email.com" style="background:transparent; border:none; flex:1; outline:none; font-family:Manrope, sans-serif; font-size:14px; color:#0a0a0a;" />
+          <button type="submit" style="background:none; border:none; cursor:pointer; font-family:Manrope, sans-serif; font-weight:700; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#0a0a0a;">Subscribe →</button>
+        </form>
+      </div>
+    </div>
+    <div class="hai-footer-bottom">
+      <div>© 2026 The Human AI Co</div>
+      <div class="hai-social">
+        <a href="#" aria-label="LinkedIn" title="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z" opacity="0"/><path d="M6.94 8.5a1.94 1.94 0 1 0 0-3.88 1.94 1.94 0 0 0 0 3.88ZM4.5 10.25h4.88V19H4.5v-8.75ZM11.75 10.25h4.67v1.2h.07c.65-1.14 2.24-2.34 4.6-2.34 4.92 0 5.83 2.99 5.83 6.88V19h-4.87v-4.68c0-1.12-.02-2.55-1.55-2.55-1.56 0-1.8 1.2-1.8 2.47V19h-4.87v-8.75Z" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="mailto:hello@thehumanai.co" aria-label="Email" title="Email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a href="/" aria-label="Website" title="Website">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9Z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <div>AI, guided by human intelligence.</div>
+    </div>
+  </div>
+</footer>

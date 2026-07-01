@@ -1,0 +1,255 @@
+<!--
+  BENTLEY — STATIC SECTIONS (native, fully editable in Webflow)
+  ------------------------------------------------------------------------------
+  Select this whole block and paste it directly onto the Webflow canvas, below
+  your Hero Embed element. Webflow converts pasted HTML/CSS into native,
+  visually-editable elements (text, images, buttons, forms) — no React, no
+  Tailwind runtime. Add the two Google Fonts below via Webflow's Font Manager
+  (Instrument Serif, Manrope) so the classes render correctly.
+
+  Fonts used: Instrument Serif (headings), Manrope (body/labels).
+  Note: the on-scroll "blur up" reveal from the original build is a Framer
+  Motion effect and won't come across via paste — recreate it with Webflow's
+  native "Scroll into view" interaction (fade + move up) on each .reveal block,
+  or leave the content static.
+-->
+<style>
+  .stay-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    min-height: 100vh;
+    background-color: #ffffff;
+  }
+  .stay-bg-image {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    pointer-events: none;
+  }
+  .stay-inner {
+    position: relative;
+    max-width: 1480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 80px 32px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .stay-heading {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(60px, 11vw, 160px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: #000;
+  }
+  .stay-heading em { font-style: italic; }
+  .stay-heading-line2 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: #000;
+    font-size: 64px;
+  }
+  .stay-form-block { max-width: 448px; }
+  .stay-copy {
+    margin-bottom: 24px;
+    font-family: "Manrope", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(0,0,0,0.78);
+  }
+  .bt-form {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    padding-bottom: 8px;
+    gap: 12px;
+  }
+  .bt-form input[type="email"] {
+    background: transparent;
+    border: none;
+    flex: 1;
+    outline: none;
+    font-family: "Manrope", sans-serif;
+    font-size: 15px;
+    color: #000;
+  }
+  .bt-form button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  .site-footer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    color: #000;
+    background-color: #f4ecdc;
+  }
+  .footer-inner {
+    position: relative;
+    max-width: 1480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 48px 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 24px;
+    margin-bottom: 80px;
+  }
+  .footer-col-heading {
+    margin-bottom: 20px;
+    color: rgba(0,0,0,0.55);
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .footer-links { list-style: none; margin: 0; padding: 0; }
+  .footer-links li { margin-bottom: 12px; }
+  .footer-links a {
+    font-family: "Manrope", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.85);
+    text-decoration: none;
+  }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-newsletter-copy {
+    margin-bottom: 20px;
+    color: rgba(0,0,0,0.65);
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .footer-newsletter-copy + .bt-form { border-bottom-color: rgba(0,0,0,0.3); }
+  .footer-newsletter-copy + .bt-form input { font-size: 14px; }
+  .footer-bottom-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.15);
+  }
+  .footer-meta {
+    color: rgba(0,0,0,0.55);
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .footer-social {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .footer-social a { color: #000; text-decoration: none; }
+  .footer-social a:hover { text-decoration: underline; }
+  .footer-social .dot { color: rgba(0,0,0,0.3); }
+
+  @media (min-width: 768px) {
+    .stay-inner { padding: 96px 64px; }
+    .footer-inner { padding: 56px 64px 48px; }
+    .footer-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 96px; }
+    .footer-bottom-row { flex-direction: row; align-items: center; }
+  }
+</style>
+
+<!-- ===== Stay In The Collection ===== -->
+<section class="stay-section">
+  <img
+    class="stay-bg-image"
+    alt=""
+    src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/cloudinarry%20to%20cloudflare/pasted-1779282335552-1_gmztyi.png" />
+  <div class="stay-inner">
+    <div class="reveal">
+      <div class="stay-heading">Stay <em>in</em></div>
+      <div class="stay-heading-line2">the collection</div>
+    </div>
+    <div class="reveal stay-form-block">
+      <p class="stay-copy">Editions and invitations from the Bentley fragrance studio, sent twice a season.</p>
+      <form class="bt-form">
+        <input type="email" placeholder="your@email.com" />
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="reveal footer-grid">
+      <div>
+        <div class="footer-col-heading">Discover</div>
+        <ul class="footer-links">
+          <li><a href="#">All fragrances</a></li>
+          <li><a href="#">The bottle</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Editions</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-heading">Studio</div>
+        <ul class="footer-links">
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">Perfumers</a></li>
+          <li><a href="#">Atelier visits</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">Boutiques</a></li>
+          <li><a href="#">Concierge</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Care guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-heading">Newsletter</div>
+        <p class="footer-newsletter-copy">Editions and invitations, sent twice a season.</p>
+        <form class="bt-form">
+          <input type="email" placeholder="your@email.com" />
+          <button type="submit">Subscribe →</button>
+        </form>
+      </div>
+    </div>
+    <div class="reveal footer-bottom-row">
+      <div class="footer-meta">© 2026 Beyond The Collection</div>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <span class="dot">·</span>
+        <a href="#">TikTok</a>
+        <span class="dot">·</span>
+        <a href="#">Spotify</a>
+      </div>
+      <div class="footer-meta">EN · USD</div>
+    </div>
+  </div>
+</footer>

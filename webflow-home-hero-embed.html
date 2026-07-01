@@ -1,0 +1,124 @@
+<!--
+  THE HUMAN AI CO — HOME HERO (Embed element)
+  ------------------------------------------------------------------------------
+  Paste into ONE Webflow Embed element, placed on the Home page directly below
+  the shared Nav symbol. This is the only page that needs this file.
+
+  What it does: a scroll-driven circle reveal opens onto an interactive 3D
+  brain (home-brain.glb, auto-rotating via <model-viewer>), with 4 orbiting
+  pills for Foundation / Aurora / Clarity / Navigation that link to each page.
+
+  BEFORE THIS WORKS: upload the 5 compressed .glb files (in the /3d-models
+  folder you were given) to a public host — a CDN, Cloudflare R2/S3 bucket, or
+  anywhere that serves them over HTTPS with correct CORS — then replace the
+  MODEL_URL placeholder below with the real hosted URL for home-brain.glb.
+  Plain Webflow Asset hosting does not accept .glb uploads, so external
+  hosting is required.
+
+  Uses no React/Framer Motion — just <model-viewer> (loaded once, site-wide,
+  from webflow-global-styles.html) and a small vanilla scroll listener. Keeps
+  this page light and easy for Webflow to run.
+-->
+<div class="hai-page" style="--accent:#ff6a3d; background:#0a0a0a;">
+  <div id="hai-home-track" style="position:relative; height:200vh;">
+    <div id="hai-home-sticky" style="position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+
+      <!-- ambient glow -->
+      <div style="position:absolute; inset:0; background:radial-gradient(55% 55% at 50% 45%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 70%);"></div>
+
+      <!-- tagline (fades out as the circle reveal grows) -->
+      <div id="hai-home-tagline" style="position:relative; z-index:4; text-align:center; padding:0 24px; transition: opacity 0.1s linear, filter 0.1s linear;">
+        <div class="hai-eyebrow" style="justify-content:center;">The Human AI Co</div>
+        <h1 class="hai-h1" style="font-size:clamp(34px,6vw,68px); margin-bottom:14px;">AI, guided by<br />human intelligence.</h1>
+        <p class="hai-lead" style="max-width:520px; margin:0 auto;">A modern AI consultancy built around one belief: technology moves fast, but people still need people. Scroll to meet the four ways we help.</p>
+      </div>
+
+      <!-- circle reveal stage: 3D brain + orbiting service pills -->
+      <div id="hai-home-circle" style="position:absolute; z-index:2; border-radius:50%; overflow:visible; width:18vmin; height:18vmin; display:flex; align-items:center; justify-content:center; transition: width 0.05s linear, height 0.05s linear;">
+        <div style="position:absolute; inset:-6%; border-radius:50%; overflow:hidden; background:#0a0a0a;">
+          <model-viewer
+            class="hai-3d"
+            src="MODEL_URL/home-brain.glb"
+            alt="The Human AI Co — glowing brain"
+            auto-rotate
+            auto-rotate-delay="0"
+            rotation-per-second="14deg"
+            camera-controls
+            disable-zoom
+            interaction-prompt="none"
+            shadow-intensity="0.6"
+            exposure="1.05"
+            environment-image="neutral"
+          ></model-viewer>
+        </div>
+
+        <!-- orbiting service pills -->
+        <div class="hai-orbit-wrap" style="position:absolute; top:50%; left:50%; width:1px; height:1px;">
+          <a href="/foundation" class="hai-orbit-node" style="--orbit-radius:26vmin; --orbit-delay:0s; --node-color:#c22c3e; margin:-18px 0 0 -70px;">
+            <span class="dot" style="background:#c22c3e;"></span>Foundation
+          </a>
+          <a href="/aurora" class="hai-orbit-node" style="--orbit-radius:26vmin; --orbit-delay:-6.5s; --node-color:#d6247e; margin:-18px 0 0 -70px;">
+            <span class="dot" style="background:#d6247e;"></span>Aurora
+          </a>
+          <a href="/clarity" class="hai-orbit-node" style="--orbit-radius:26vmin; --orbit-delay:-13s; --node-color:#7c3aed; margin:-18px 0 0 -70px;">
+            <span class="dot" style="background:#7c3aed;"></span>Clarity
+          </a>
+          <a href="/navigation" class="hai-orbit-node" style="--orbit-radius:26vmin; --orbit-delay:-19.5s; --node-color:#2e62d6; margin:-18px 0 0 -70px;">
+            <span class="dot" style="background:#2e62d6;"></span>Navigation
+          </a>
+        </div>
+      </div>
+
+      <!-- scroll hint -->
+      <div id="hai-home-scrollhint" style="position:absolute; bottom:36px; left:50%; transform:translateX(-50%); z-index:4; color:rgba(245,245,242,0.6); font-size:11px; letter-spacing:0.3em; text-transform:uppercase; transition:opacity 0.2s linear;">
+        Scroll ↓
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var track = document.getElementById('hai-home-track');
+  var tagline = document.getElementById('hai-home-tagline');
+  var circle = document.getElementById('hai-home-circle');
+  var hint = document.getElementById('hai-home-scrollhint');
+  if (!track) return;
+
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var rect = track.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var total = rect.height - vh;
+    if (total <= 0) return;
+    var scrolled = -rect.top;
+    var progress = Math.min(Math.max(scrolled / total, 0), 1);
+
+    // circle grows from 18vmin to 62vmin over the first 70% of the scroll track
+    var growP = Math.min(progress / 0.7, 1);
+    var size = 18 + growP * 44; // vmin
+    circle.style.width = size + 'vmin';
+    circle.style.height = size + 'vmin';
+
+    // tagline fades out over the first 35%
+    var fadeP = Math.min(progress / 0.35, 1);
+    tagline.style.opacity = String(1 - fadeP);
+    tagline.style.filter = 'blur(' + (fadeP * 10) + 'px)';
+
+    hint.style.opacity = progress < 0.08 ? '1' : '0';
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+</script>
